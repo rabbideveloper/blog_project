@@ -18,7 +18,12 @@
                 <li><a class="dropdown-item" href="#!">Settings</a></li>
                 <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                 <li><hr class="dropdown-divider" /></li>
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
+                <li class="text-center">
+                    {!! Form::open(['method'=>'post','route'=>'logout']) !!}
+                    {!! Form::button('Logout',['type'=>'submit','class'=>'btn btn-sm btn-danger','onclick'=>'return confirm("Are you sure to logout?")']) !!}
+                    {!! Form::close() !!}
+                </li>
+
             </ul>
         </li>
     </ul>
