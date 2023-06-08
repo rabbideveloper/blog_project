@@ -9,14 +9,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mb-0">Category List</h4>
+                    <div class="d-flex justify-content-between">
+                        <h4 class="mb-0">Category List</h4>
+                        <a href="{{route('category.create')}}"><button class="btn btn-sm btn-success">Add</button></a>
+                    </div>
                 </div>
                 <div class="card-body">
-                    @if(session('msg'))
-                        <div class="alert alert-{{session('cls')}}">
-                            {!! session('msg') !!}
-                        </div>
-                    @endif
+{{--                    @if(session('msg'))--}}
+{{--                        <div class="alert alert-{{session('cls')}}">--}}
+{{--                            {!! session('msg') !!}--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -63,6 +66,20 @@
         </div>
     </div>
 
+    @if(session('msg'))
+        @push('js')
+            <script>
+                Swal.fire({
+                    position: 'top-end',
+                    icon: '{{session('cls') == 'danger' ? 'error' : session('cls')}}',
+                    toast: true,
+                    title: '{{session('msg')}}',
+                    showConfirmButton: false,
+                    timer: 3000
+                })
+            </script>
+        @endpush
+    @endif
 
     @push('js')
         <script>
