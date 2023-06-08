@@ -12,6 +12,11 @@
                     <h4 class="mb-0">Category List</h4>
                 </div>
                 <div class="card-body">
+                    @if(session('msg'))
+                        <div class="alert alert-{{session('cls')}}">
+                            {!! session('msg') !!}
+                        </div>
+                    @endif
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -43,8 +48,8 @@
                                         <a href="{{route('category.show',$category->id)}}"><button class="btn btn-info btn-sm"><i class="fa-solid fa-eye"></i></button></a>
                                         <a href="{{route('category.edit',$category->id)}}"><button class="btn btn-warning btn-sm mx-1"><i class="fa-solid fa-edit"></i></button></a>
 
-                                        {!! Form::open(['method' => 'delete', 'route' => ['category.destroy', $category->id]]) !!}
-                                        {!! Form::button('<i class="fa-solid fa-trash"></i>',['type' => 'submit', 'class' => 'btn btn-danger btn-sm']) !!}
+                                        {!! Form::open(['method' => 'delete','id' => 'form_'.$category->id, 'route' => ['category.destroy', $category->id]]) !!}
+                                        {!! Form::button('<i class="fa-solid fa-trash"></i>',['type' => 'button','data-id' =>$category->id, 'class' => 'delete btn btn-danger btn-sm']) !!}
                                         {!! Form::close() !!}
                                     </div>
                                 </td>
@@ -58,4 +63,30 @@
         </div>
     </div>
 
+
+    @push('js')
+        <script>
+
+            $('.delete').on('click',function (){
+                let id = $(this).attr('data-id');
+                Swal.fire({
+                    title: 'Are you sure to delete?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $(`#form_${id}`).submit();
+                    }
+                });
+
+            })
+
+
+
+        </script>
+    @endpush
 @endsection
