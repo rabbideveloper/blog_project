@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static create(array $category_data)
  * @method static orderBy(string $string)
- * @method static pluck(string $string, string $string1)
  */
-class Category extends Model
+class Tag extends Model
 {
     use HasFactory;
     protected $guarded = [];
