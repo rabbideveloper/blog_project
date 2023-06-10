@@ -24,7 +24,7 @@
 <div class="row">
 @foreach($tags as $tag)
 <div class="col-md-2">
-    {!! Form::checkbox('tag_id',$tag->id, false) !!} <span>{{$tag->name}}</span>
+    {!! Form::checkbox('tag_ids[]',$tag->id, false) !!} <span>{{$tag->name}}</span>
 </div>
 @endforeach
 </div>
