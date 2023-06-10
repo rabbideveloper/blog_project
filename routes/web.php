@@ -2,9 +2,10 @@
 
 use App\Http\Controllers\Backend\BackEndController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\PostController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\TagController;
 use App\Http\Controllers\Frontend\FrontendController;
-use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,8 +29,10 @@ Route::get('/single-post', [FrontendController::class, 'single'])->name('front.s
 Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/', [BackEndController::class, 'index'])->name('back.index');
     Route::resource('category', CategoryController::class);
+    Route::get('get-subcategory/{id}',[SubCategoryController::class,'getSubCategoryByCategoryId']);
     Route::resource('sub-category', SubCategoryController::class);
     Route::resource('tag', TagController::class);
+    Route::resource('post', PostController::class);
 });
 
 //Route::get('/dashboard', function () {

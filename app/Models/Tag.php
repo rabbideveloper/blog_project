@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static orderBy(string $string)
+ * @method static where(string $string, int $int)
  */
 class Tag extends Model
 {
