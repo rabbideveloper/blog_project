@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('page_title','Create Category')
-@section('page_sub_title','Create');
+@section('page_sub_title','Create')
 
 
 @section('content')

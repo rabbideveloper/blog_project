@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('page_title','Dashboard')
-@section('page_sub_title','Dashboard');
+@section('page_sub_title','Dashboard')
 
 
 @section('content')

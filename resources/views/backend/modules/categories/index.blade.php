@@ -2,7 +2,7 @@
 @extends('backend.layouts.master')
 
 @section('page_title','Category')
-@section('page_sub_title','List');
+@section('page_sub_title','List')
 
 
 @section('content')

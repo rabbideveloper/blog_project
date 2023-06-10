@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('page_title','Edit Tag')
-@section('page_sub_title','Edit');
+@section('page_sub_title','Edit')
 
 
 @section('content')
