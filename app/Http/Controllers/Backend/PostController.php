@@ -28,9 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::where('status',1)->pluck('name','id');
-        $tags = Tag::where('status',1)->select('name','id')->get();
-        return view('backend.modules.post.create',compact('categories','tags'));
+        $categories = Category::where('status', 1)->pluck('name', 'id');
+        $tags = Tag::where('status', 1)->select('name', 'id')->get();
+        return view('backend.modules.post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -38,7 +38,7 @@ class PostController extends Controller
      */
     public function store(PostCreateRequest $request)
     {
-        $post_data = $request->except(['slug','tag_ids','photo']);
+        $post_data = $request->except(['slug', 'tag_ids', 'photo']);
         $post_data['slug'] = Str::slug($request->input('slug'));
         $post_data['user_id'] = Auth::user()->id;
         $post_data['is_approved'] = 1;
@@ -50,14 +50,17 @@ class PostController extends Controller
             $width = 1000;
             $thumb_height = 150;
             $thumb_width = 300;
-            $path = "image/post/original";
-            $thumb_path = "image/post/thumbnail";
+            $path = "image/post/original/";
+            $thumb_path = "image/post/thumbnail/";
 
-            $post_data['photo'] = PhotoUploadController::imageUpload($name, $height, $width, $path,$file);
-            PhotoUploadController::imageUpload($name, $thumb_height, $thumb_width,$thumb_path ,$file);
-
-
+            $post_data['photo'] = PhotoUploadController::imageUpload($name, $height, $width, $path, $file);
+            PhotoUploadController::imageUpload($name, $thumb_height, $thumb_width, $thumb_path, $file);
         }
+
+        $post = Post::create($post_data);
+        $post->tag()->attach($request->input('tag_ids'));
+
+
     }
 
     /**

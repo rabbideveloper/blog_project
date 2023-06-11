@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\SubCategory;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class SubCategoryController extends Controller
 {
@@ -73,8 +76,9 @@ class SubCategoryController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @throws ValidationException
      */
-    public function update(Request $request, SubCategory $subCategory)
+    public function update(Request $request, SubCategory $subCategory): RedirectResponse
     {
         $this->validate($request, [
             'name' => 'required|min:3|max:255',
@@ -96,7 +100,7 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SubCategory $subCategory)
+    public function destroy(SubCategory $subCategory): RedirectResponse
     {
         $subCategory->delete();
         Session::flash('cls', 'danger');
@@ -104,7 +108,7 @@ class SubCategoryController extends Controller
         return redirect()->route('sub-category.index');
     }
 
-    public function getSubCategoryByCategoryId(int $id)
+    public function getSubCategoryByCategoryId(int $id): JsonResponse
     {
         $sub_categories = SubCategory::select('id','name')->where('status',1)->where('category_id', $id)->get();
         return response()->json($sub_categories) ;
