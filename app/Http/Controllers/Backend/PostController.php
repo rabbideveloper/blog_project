@@ -78,7 +78,9 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::where('status', 1)->pluck('name', 'id');
+        $tags = Tag::where('status', 1)->select('name', 'id')->get();
+        return view('backend.modules.post.edit',compact('post','categories','tags'));
     }
 
     /**
@@ -86,7 +88,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+
     }
 
     /**

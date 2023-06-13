@@ -132,7 +132,7 @@
                                 <td>{{$post->sub_category?->name}}</td>
                             </tr>
                             <tr>
-                                <th> Slug</th>
+                                <th> Slug </th>
                                 <td>{{$post->sub_category?->slug}}</td>
                             </tr>
                             <tr>
