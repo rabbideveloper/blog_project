@@ -24,13 +24,20 @@
 <div class="row">
     @foreach($tags as $tag)
         <div class="col-md-2">
-            {!! Form::checkbox('tag_ids[]',$tag->id, false) !!} <span>{{$tag->name}}</span>
+            {!! Form::checkbox('tag_ids[]',$tag->id, Route::currentRouteName() == 'post.edit' ? in_array($tag->id, $selected_tags) : false) !!} <span>{{$tag->name}}</span>
         </div>
     @endforeach
 </div>
 
 {!! Form::label('photo', 'Select Photo',['class' => 'mt-2']) !!}
 {!! Form::file('photo', ['class' => 'form-control']) !!}
+
+@if(Route::currentRouteName() == 'post.edit')
+    <div class="my-3">
+        <img class="img-thumbnail post_image" data-src="{{url('image/post/original/'.$post->photo)}}" src="{{url('image/post/thumbnail/'.$post->photo)}}" alt="{{$post->title}}">
+    </div>
+@endif
+
 
 
 

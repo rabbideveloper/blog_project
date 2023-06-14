@@ -23,7 +23,7 @@
                         </div>
                     @endif
 
-                    {!! Form::model($post,['method' => 'put', 'route' => ['post.update',$post->id]]) !!}
+                    {!! Form::model($post,['method' => 'put', 'route' => ['post.update',$post->id],'files' => true]) !!}
                         @include('backend.modules.post.form')
                     {!! Form::button('Update Post',['type'=>'submit','class'=>'btn btn-success btn-sm mt-3']) !!}
                     {!! Form::close() !!}
